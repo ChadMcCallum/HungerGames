@@ -7,11 +7,6 @@ namespace Players
     {
         private char lastPlayed = 's';
 
-        public Alternating(Random r)
-        {
-            
-        }
-
         public char[] HuntChoices(int roundNumber, int currentFood, double currentReputation, int m, double[] playerReputations)
         {
             var result = new List<char>();

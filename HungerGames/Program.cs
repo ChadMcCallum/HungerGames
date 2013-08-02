@@ -13,7 +13,7 @@ namespace HungerGames
     {
         static StreamWriter log = new StreamWriter("log.txt", false);
 
-        private static int PlayerMultiplier = 2;
+        private static int PlayerMultiplier = 10;
         private static Random random = new Random();
 
         static void Main(string[] args)
@@ -30,7 +30,7 @@ namespace HungerGames
                         Food = 300,
                         Hunts = 0,
                         Slacks = 0,
-                        Player = (IPlayer)Activator.CreateInstance(player, random)
+                        Player = (IPlayer)Activator.CreateInstance(player)
                     });
                 }
 
@@ -44,7 +44,7 @@ namespace HungerGames
                 Log("Round {0}", i);
                 //randomly pair players for hunts
                 var randomArray = remainingPlayers.OrderBy(p => random.Next()).ToList();
-                var m = random.Next(1, randomArray.Count - 1);
+                var m = random.Next(1, (randomArray.Count * (randomArray.Count - 1)));
                 //get each player's choices
                 foreach (var player in remainingPlayers)
                 {

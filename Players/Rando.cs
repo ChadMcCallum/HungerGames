@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace Players
 {
     class Rando : IPlayer
     {
-        private Random _random;
-
-        public Rando(Random r)
-        {
-            _random = r;
-        }
+        static Random _random = new Random();
 
         public char[] HuntChoices(int roundNumber, int currentFood, double currentReputation, int m, double[] playerReputations)
         {

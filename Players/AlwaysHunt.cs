@@ -8,11 +8,6 @@ namespace Players
 {
     class AlwaysHunt : IPlayer
     {
-        public AlwaysHunt(Random r)
-        {
-            
-        }
-
         public char[] HuntChoices(int roundNumber, int currentFood, double currentReputation, int m, double[] playerReputations)
         {
             var result = new List<char>();
