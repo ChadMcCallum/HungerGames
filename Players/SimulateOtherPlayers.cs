@@ -1,23 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Players
 {
-    public class Karlee : IPlayer
+    public class SimulateOtherPlayers : IPlayer
     {
-        private bool stopHunting = false;
+        Random r = new Random();
 
         public char[] HuntChoices(int roundNumber, int currentFood, double currentReputation, int m, double[] playerReputations)
         {
             var result = new List<char>();
-            var c = 's';
-            if (!stopHunting && currentReputation <= playerReputations.Max())
+            var likelyHunts = 0;
+            foreach (var rep in playerReputations)
             {
-                c = 'h';
+                for (var i = 0; i < playerReputations.Length; i++)
+                {
+                    if (r.Next(100) <= rep*100)
+                        likelyHunts++;
+                }
             }
-            else
+            var c = 'h';
+            //if we're likely to get the bonus anyways, slack
+            if (m < likelyHunts)
             {
-                stopHunting = true; 
+                c = 's';
             }
             for (var i = 0; i < playerReputations.Length; i++)
             {

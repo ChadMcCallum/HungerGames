@@ -47,6 +47,7 @@
     <Compile Include="FailHuntsUnlessTheyThinkYouAreAnAsshole.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="PessimsticSlacker.cs" />
+    <Compile Include="SimulateOtherPlayers.cs" />
     <Compile Include="StarveBadPlayers.cs" />
     <Compile Include="Karlee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,9 +13,9 @@ namespace HungerGames
     {
         static StreamWriter log = new StreamWriter("log.txt", false);
 
-        private static int PlayerMultiplier = 1;
+        private static int PlayerMultiplier = 3;
         private static Random random = new Random();
-        private static int MaxRounds = 100000;
+        private static int MaxRounds = 10000;
 
         static void Main(string[] args)
         {
