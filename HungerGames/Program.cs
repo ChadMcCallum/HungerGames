@@ -13,7 +13,7 @@ namespace HungerGames
     {
         static StreamWriter log = new StreamWriter("log.txt", false);
 
-        private static int PlayerMultiplier = 10;
+        private static int PlayerMultiplier = 1;
         private static Random random = new Random();
 
         static void Main(string[] args)
@@ -127,6 +127,15 @@ namespace HungerGames
                     }
                 }
                 i++;
+                var deadPlayers = remainingPlayers.Where(p => p.Food <= 0);
+                if (deadPlayers.Count() > 0)
+                {
+                    Log("Dead Players:");
+                    foreach (var deadPlayer in deadPlayers)
+                    {
+                        Log("{0}", deadPlayer.Player.GetType().FullName);
+                    }
+                }
                 remainingPlayers = activePlayers.Where(p => p.Food > 0).ToList();
                 Log("");
             }
