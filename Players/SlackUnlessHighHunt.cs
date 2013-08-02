@@ -9,7 +9,7 @@ namespace Players
             var result = new List<char>();
             for (var i = 0; i < playerReputations.Length; i++)
             {
-                if (m > (playerReputations.Length ^ 2/2))
+                if (m > (playerReputations.Length * (playerReputations.Length - 1)) / 2)
                 {
                     result.Add('s');
                 }

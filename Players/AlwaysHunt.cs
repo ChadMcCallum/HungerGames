@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Players
 {
-    class AlwaysHunt : IPlayer
+    public class AlwaysHunt : IPlayer
     {
         public char[] HuntChoices(int roundNumber, int currentFood, double currentReputation, int m, double[] playerReputations)
         {
