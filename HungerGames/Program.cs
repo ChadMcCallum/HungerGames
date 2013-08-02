@@ -15,7 +15,7 @@ namespace HungerGames
 
         private static int PlayerMultiplier = 1;
         private static Random random = new Random();
-        private static int MaxRounds = 50000;
+        private static int MaxRounds = 10000;
 
         static void Main(string[] args)
         {
