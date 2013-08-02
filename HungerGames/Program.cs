@@ -15,6 +15,7 @@ namespace HungerGames
 
         private static int PlayerMultiplier = 1;
         private static Random random = new Random();
+        private static int MaxRounds = 100000;
 
         static void Main(string[] args)
         {
@@ -33,12 +34,15 @@ namespace HungerGames
                         Player = (IPlayer)Activator.CreateInstance(player)
                     });
                 }
-
+            }
+            foreach (var player in activePlayers)
+            {
+                player.Food *= activePlayers.Count - 1;
             }
             //while people have food
             var i = 1;
             var remainingPlayers = activePlayers.Where(p => p.Food > 0).ToList();
-            while (remainingPlayers.Count > 1)
+            while (remainingPlayers.Count > 1 && i < MaxRounds)
             {
                 var playerChoices = new List<char[]>();
                 Log("Round {0}", i);
@@ -114,17 +118,24 @@ namespace HungerGames
                 Log("Round results");
                 foreach (var player in remainingPlayers)
                 {
-                    Log("Player {0}: Food {1}, Hunts {2}, Slacks {3}, Reputation {4}", player.Player.GetType().FullName, player.Food, player.Hunts, player.Slacks, player.Reputation);
                     if (totalHuntsThisRound >= m)
                     {
-                        Log("Got bonus food");
                         player.Player.RoundEnd(2*(remainingPlayers.Count - 1), m, remainingPlayers.Count);
+                        player.Food += 2*(remainingPlayers.Count - 1);
                     }
                     else
                     {
-                        Log("Didn't get bonus food");
                         player.Player.RoundEnd(0, m, remainingPlayers.Count);
                     }
+                    Log("Player {0}: Food {1}, Hunts {2}, Slacks {3}, Reputation {4}", player.Player.GetType().FullName, player.Food, player.Hunts, player.Slacks, player.Reputation);
+                }
+                if (totalHuntsThisRound >= m)
+                {
+                    Log("Got bonus food");
+                }
+                else
+                {
+                    Log("Didn't get bonus food");
                 }
                 i++;
                 var deadPlayers = remainingPlayers.Where(p => p.Food <= 0);
@@ -141,9 +152,9 @@ namespace HungerGames
             }
             //print winner(s)
             Log("Winning Player(s)");
-            foreach (var player in remainingPlayers)
+            foreach (var player in remainingPlayers.OrderByDescending(p => p.Food))
             {
-                Log(player.Player.GetType().FullName);
+                Log("{0}, Food: {1}", player.Player.GetType().FullName, player.Food);
             }
             log.Close();
             Console.ReadLine();
