@@ -21,7 +21,6 @@ namespace HungerGames
             //init players
             var playerAssembly = Assembly.GetAssembly(typeof(IPlayer));
             var activePlayers = new List<ActivePlayer>();
-            var random = new Random();
             foreach (var player in playerAssembly.GetTypes().Where(t => t.GetInterface("IPlayer") != null))
             {
                 for (var p = 0; p < PlayerMultiplier; p++)
@@ -38,10 +37,10 @@ namespace HungerGames
             }
             //while people have food
             var i = 1;
-            var playerChoices = new List<char[]>();
             var remainingPlayers = activePlayers.Where(p => p.Food > 0).ToList();
             while (remainingPlayers.Count > 1)
             {
+                var playerChoices = new List<char[]>();
                 Log("Round {0}", i);
                 //randomly pair players for hunts
                 var randomArray = remainingPlayers.OrderBy(p => random.Next()).ToList();

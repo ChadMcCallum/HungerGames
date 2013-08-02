@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alternating.cs" />
     <Compile Include="AlwaysHunt.cs" />
     <Compile Include="AlwaysSlack.cs" />
     <Compile Include="IPlayer.cs" />
