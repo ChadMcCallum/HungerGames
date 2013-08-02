@@ -1,24 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Players
 {
-    public class Karlee : IPlayer
+    public class HuntIfHungry : IPlayer
     {
-        private bool stopHunting = false;
+        private int startingFood = 0;
+        private int food = Int32.MinValue;
+        private int change = 0;
 
         public char[] HuntChoices(int roundNumber, int currentFood, double currentReputation, int m, double[] playerReputations)
         {
+            if (food == Int32.MinValue)
+            {
+                food = 300*(playerReputations.Length + 1);
+                startingFood = food;
+            }
+            var c = 'h';
+            if (change < 0 || food > startingFood)
+            {
+                c = 's';
+            }
             var result = new List<char>();
-            var c = 's';
-            if (!stopHunting && currentReputation <= playerReputations.Max())
-            {
-                c = roundNumber%3 == 0 ? 's' : 'h';
-            }
-            else
-            {
-                stopHunting = true; 
-            }
             for (var i = 0; i < playerReputations.Length; i++)
             {
                 result.Add(c);
@@ -28,10 +32,13 @@ namespace Players
 
         public void HuntOutcomes(int[] foodEarnings)
         {
+            change = foodEarnings.Sum();
+            food += foodEarnings.Sum();
         }
 
         public void RoundEnd(int award, int m, int numberOfHunters)
         {
+            food += award;
         }
     }
 }

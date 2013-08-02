@@ -45,6 +45,9 @@
     <Compile Include="Brian.cs" />
     <Compile Include="FailHunts.cs" />
     <Compile Include="FailHuntsUnlessTheyThinkYouAreAnAsshole.cs" />
+    <Compile Include="HoldAGrudge.cs" />
+    <Compile Include="HuntIfHungry.cs" />
+    <Compile Include="ILikeBonusPoints.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="PessimsticSlacker.cs" />
     <Compile Include="SimulateOtherPlayers.cs" />
@@ -57,6 +60,7 @@
     <Compile Include="SlackIfLowerRep.cs" />
     <Compile Include="SlackUnlessHighHunt.cs" />
     <Compile Include="StarveBadPlayersUnlessTheyThinkYouAreAnAsshole.cs" />
+    <Compile Include="SwingVote.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

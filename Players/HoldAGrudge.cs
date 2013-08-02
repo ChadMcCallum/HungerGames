@@ -3,22 +3,18 @@ using System.Linq;
 
 namespace Players
 {
-    public class Karlee : IPlayer
+    public class HoldAGrudge : IPlayer
     {
-        private bool stopHunting = false;
+        private int lastTotal = 1;
 
         public char[] HuntChoices(int roundNumber, int currentFood, double currentReputation, int m, double[] playerReputations)
         {
-            var result = new List<char>();
             var c = 's';
-            if (!stopHunting && currentReputation <= playerReputations.Max())
+            if (lastTotal > 0)
             {
-                c = roundNumber%3 == 0 ? 's' : 'h';
+                c = 'h';
             }
-            else
-            {
-                stopHunting = true; 
-            }
+            var result = new List<char>();
             for (var i = 0; i < playerReputations.Length; i++)
             {
                 result.Add(c);
@@ -28,10 +24,12 @@ namespace Players
 
         public void HuntOutcomes(int[] foodEarnings)
         {
+            lastTotal = foodEarnings.Sum();
         }
 
         public void RoundEnd(int award, int m, int numberOfHunters)
         {
+            lastTotal += award;
         }
     }
 }
