@@ -13,9 +13,9 @@ namespace HungerGames
     {
         static StreamWriter log = new StreamWriter("log.txt", false);
 
-        private static int PlayerMultiplier = 1;
+        private static int PlayerMultiplier = 10;
         private static Random random = new Random();
-        private static int MaxRounds = 10000;
+        private static int MaxRounds = 100000;
 
         static void Main(string[] args)
         {
@@ -45,7 +45,7 @@ namespace HungerGames
             while (remainingPlayers.Count > 1 && i < MaxRounds)
             {
                 var playerChoices = new List<char[]>();
-                Log("Round {0}", i);
+                //Log("Round {0}", i);
                 //randomly pair players for hunts
                 var randomArray = remainingPlayers.OrderBy(p => random.Next()).ToList();
                 var m = random.Next(1, (randomArray.Count * (randomArray.Count - 1)));
@@ -115,7 +115,7 @@ namespace HungerGames
                     player.Player.HuntOutcomes(outcomes.ToArray());
                 }
                 //bonus food
-                Log("Round results");
+                //Log("Round results");
                 foreach (var player in remainingPlayers)
                 {
                     if (totalHuntsThisRound >= m)
@@ -127,28 +127,28 @@ namespace HungerGames
                     {
                         player.Player.RoundEnd(0, m, remainingPlayers.Count);
                     }
-                    Log("Player {0}: Food {1}, Hunts {2}, Slacks {3}, Reputation {4}", player.Player.GetType().FullName, player.Food, player.Hunts, player.Slacks, player.Reputation);
+                    //Log("Player {0}: Food {1}, Hunts {2}, Slacks {3}, Reputation {4}", player.Player.GetType().FullName, player.Food, player.Hunts, player.Slacks, player.Reputation);
                 }
                 if (totalHuntsThisRound >= m)
                 {
-                    Log("Got bonus food");
+                    //Log("Got bonus food");
                 }
                 else
                 {
-                    Log("Didn't get bonus food");
+                    //Log("Didn't get bonus food");
                 }
                 i++;
                 var deadPlayers = remainingPlayers.Where(p => p.Food <= 0);
                 if (deadPlayers.Count() > 0)
                 {
-                    Log("Dead Players:");
+                    //Log("Dead Players:");
                     foreach (var deadPlayer in deadPlayers)
                     {
                         Log("{0}", deadPlayer.Player.GetType().FullName);
                     }
                 }
                 remainingPlayers = activePlayers.Where(p => p.Food > 0).ToList();
-                Log("");
+                //Log("");
             }
             //print winner(s)
             Log("Winning Player(s)");
