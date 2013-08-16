@@ -38,6 +38,7 @@ namespace Players
 
         public void RoundEnd(int award, int m, int numberOfHunters)
         {
+            change += award;
             food += award;
         }
     }
